@@ -1,83 +1,61 @@
-import { motion } from "framer-motion";
-import { Bot, Sparkles, Camera, Megaphone, BadgeDollarSign, Paintbrush } from "lucide-react";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Bolt, Target, BarChart3, Workflow } from 'lucide-react';
 
 const services = [
   {
-    icon: Megaphone,
-    title: "Social Media Marketing",
-    desc: "Build loyal communities and convert followers into fans.",
-    accent: "from-sky-500/20 to-indigo-500/20",
+    icon: <Target className="h-5 w-5" />,
+    title: 'Paid Social & UGC',
+    desc: 'Full-funnel strategy, creative testing sprints, and continuous optimization.'
   },
   {
-    icon: BadgeDollarSign,
-    title: "Paid Advertising (Meta & Google)",
-    desc: "Data-driven campaigns that deliver measurable ROI.",
-    accent: "from-purple-500/20 to-fuchsia-500/20",
+    icon: <BarChart3 className="h-5 w-5" />,
+    title: 'Analytics & Attribution',
+    desc: 'Blended metrics, MMM direction, and decision frameworks that move the needle.'
   },
   {
-    icon: Camera,
-    title: "Content Creation",
-    desc: "Scroll-stopping reels, thumbnails, and carousels.",
-    accent: "from-emerald-500/20 to-cyan-500/20",
+    icon: <Bolt className="h-5 w-5" />,
+    title: 'AI Creative Systems',
+    desc: 'Rapid concepting, versioning, and motion graphics powered by AI tooling.'
   },
   {
-    icon: Bot,
-    title: "AI Automation Systems",
-    desc: "Smart workflows that handle leads and analytics automatically.",
-    accent: "from-pink-500/20 to-violet-500/20",
-  },
-  {
-    icon: Paintbrush,
-    title: "Branding & Design",
-    desc: "Beautiful visual identity that sells and inspires.",
-    accent: "from-amber-500/20 to-orange-500/20",
-  },
-  {
-    icon: Sparkles,
-    title: "Consulting & Strategy",
-    desc: "Roadmaps that align creativity with business outcomes.",
-    accent: "from-blue-500/20 to-cyan-500/20",
+    icon: <Workflow className="h-5 w-5" />,
+    title: 'Automation & CRM',
+    desc: 'Lead scoring, instant replies, and lifecycle flows that scale reliably.'
   },
 ];
 
-export default function Services() {
+const Services = () => {
   return (
-    <section id="services" className="relative w-full bg-black py-24 text-white">
-      <div className="mx-auto w-[92%] max-w-6xl">
+    <section id="services" className="relative w-full bg-[#0B0C12] py-20 text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(168,85,247,0.08),_transparent_60%)]" />
+      <div className="relative mx-auto max-w-7xl px-6">
         <div className="mb-10">
-          <h2 className="text-3xl font-bold md:text-4xl">Services built for scale</h2>
-          <p className="mt-2 max-w-2xl text-white/70">
-            Every service is engineered to drive attention, conversion, and lifetime value.
-          </p>
+          <h2 className="text-3xl font-bold sm:text-4xl">Services built for scale</h2>
+          <p className="mt-2 text-white/70">From creative to automation, we ship outcomes—not just assets.</p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {services.map((s, i) => (
             <motion.div
               key={s.title}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${s.accent} p-6`}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: i * 0.05 }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-inner shadow-black/30"
             >
-              <div className="flex items-center justify-between">
-                <div className="rounded-xl bg-black/40 p-2">
-                  <s.icon className="h-5 w-5 text-sky-400" />
-                </div>
-                <span className="rounded-full bg-black/40 px-3 py-1 text-xs text-white/70">
-                  Premium
-                </span>
+              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600/80 to-purple-600/80">
+                {s.icon}
               </div>
-              <h3 className="mt-4 text-lg font-semibold">{s.title}</h3>
-              <p className="mt-2 text-sm text-white/70">{s.desc}</p>
-              <button className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs text-white/90 backdrop-blur transition group-hover:bg-white/10">
-                Learn more
-              </button>
+              <h3 className="text-lg font-semibold">{s.title}</h3>
+              <p className="mt-2 text-sm text-white/80">{s.desc}</p>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Services;

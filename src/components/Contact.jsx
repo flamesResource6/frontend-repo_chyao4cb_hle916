@@ -1,189 +1,32 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { MessageCircle, Phone, Send } from "lucide-react";
+import React from 'react';
+import { MessageCircle, Send } from 'lucide-react';
 
-export default function Contact() {
-  const [form, setForm] = useState({
-    name: "",
-    business: "",
-    email: "",
-    service: "",
-    message: "",
-  });
-
-  const handleChange = (e) => {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const subject = encodeURIComponent("New Inquiry - Social House");
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nBusiness: ${form.business}\nEmail: ${form.email}\nService: ${form.service}\nMessage: ${form.message}`
-    );
-    window.location.href = `mailto:hello@socialhouse.agency?subject=${subject}&body=${body}`;
-  };
-
+const Contact = () => {
   return (
-    <section id="contact" className="relative w-full bg-black py-24 text-white">
-      <div className="mx-auto w-[92%] max-w-6xl">
+    <section id="contact" className="relative w-full bg-[#07080B] py-20 text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.08),_transparent_60%)]" />
+      <div className="relative mx-auto max-w-7xl px-6">
         <div className="mb-10">
-          <h2 className="text-3xl font-bold md:text-4xl">Let's build your growth engine</h2>
-          <p className="mt-2 max-w-2xl text-white/70">
-            We reply within 2 hours — yes, really.
-          </p>
+          <h2 className="text-3xl font-bold sm:text-4xl">Start your growth sprint</h2>
+          <p className="mt-2 text-white/70">Tell us about your goals. We’ll reply within one business day.</p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-5">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="md:col-span-3"
-          >
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur"
-            >
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="mb-1 block text-sm text-white/70">Name</label>
-                  <input
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none placeholder:text-white/40 focus:border-sky-500"
-                    placeholder="Jane Doe"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1 block text-sm text-white/70">Business Name</label>
-                  <input
-                    name="business"
-                    value={form.business}
-                    onChange={handleChange}
-                    className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none placeholder:text-white/40 focus:border-sky-500"
-                    placeholder="Acme Co."
-                  />
-                </div>
-              </div>
+        <form action="mailto:hello@socialhouse.agency" method="post" encType="text/plain" className="grid gap-4 md:grid-cols-2">
+          <input className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none placeholder:text-white/50" placeholder="Your Name" required />
+          <input className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none placeholder:text-white/50" placeholder="Business" />
+          <input type="email" className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none placeholder:text-white/50 md:col-span-2" placeholder="Email" required />
+          <textarea className="min-h-[120px] rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none placeholder:text-white/50 md:col-span-2" placeholder="What would you like to achieve?" />
+          <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 font-medium shadow-lg shadow-blue-500/20 transition hover:brightness-110 md:col-span-2">
+            Send Message <Send className="h-4 w-4" />
+          </button>
+        </form>
 
-              <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label className="mb-1 block text-sm text-white/70">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none placeholder:text-white/40 focus:border-sky-500"
-                    placeholder="you@company.com"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1 block text-sm text-white/70">Service Interested In</label>
-                  <select
-                    name="service"
-                    value={form.service}
-                    onChange={handleChange}
-                    className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-sky-500"
-                  >
-                    <option value="" className="bg-black">
-                      Select a service
-                    </option>
-                    <option value="smm" className="bg-black">
-                      Social Media Marketing
-                    </option>
-                    <option value="paid" className="bg-black">
-                      Paid Advertising (Meta/Google)
-                    </option>
-                    <option value="content" className="bg-black">
-                      Content Creation
-                    </option>
-                    <option value="ai" className="bg-black">
-                      AI Automation Systems
-                    </option>
-                    <option value="branding" className="bg-black">
-                      Branding & Design
-                    </option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <label className="mb-1 block text-sm text-white/70">Message</label>
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  rows={5}
-                  className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none placeholder:text-white/40 focus:border-sky-500"
-                  placeholder="Tell us about your goals…"
-                />
-              </div>
-
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <button
-                  type="submit"
-                  className="inline-flex items-center gap-2 rounded-full bg-sky-500 px-5 py-2.5 font-semibold text-black shadow-[0_0_40px_rgba(56,189,248,0.35)] transition hover:bg-sky-400"
-                >
-                  <Send className="h-4 w-4" /> Book a Free Strategy Call
-                </button>
-                <a
-                  href="https://wa.me/919876543210"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-white backdrop-blur hover:bg-white/10"
-                >
-                  <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
-                </a>
-                <div className="text-xs text-white/60">We reply within 2 hours — yes, really.</div>
-              </div>
-            </form>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="space-y-4 md:col-span-2"
-          >
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-sky-500/10 to-indigo-500/10 p-6">
-              <h4 className="font-semibold">Prefer to talk?</h4>
-              <p className="mt-1 text-sm text-white/70">
-                Call us at <a href="tel:+919876543210" className="text-sky-400">+91 98765 43210</a> or drop a line at
-                <a href="mailto:hello@socialhouse.agency" className="text-sky-400"> hello@socialhouse.agency</a>
-              </p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <h4 className="font-semibold">Newsletter</h4>
-              <p className="mt-1 text-sm text-white/70">
-                Join the Social House Insider Newsletter.
-              </p>
-              <div className="mt-3 flex items-center gap-2">
-                <input
-                  type="email"
-                  placeholder="you@company.com"
-                  className="flex-1 rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none placeholder:text-white/40 focus:border-sky-500"
-                />
-                <button className="rounded-lg bg-white/10 px-3 py-2 text-sm text-white hover:bg-white/20">
-                  Subscribe
-                </button>
-              </div>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-purple-500/10 to-fuchsia-500/10 p-6">
-              <h4 className="font-semibold">Free Brand Audit</h4>
-              <p className="mt-1 text-sm text-white/70">
-                Get a personalized audit with actionable wins in 24 hours.
-              </p>
-            </div>
-          </motion.div>
-        </div>
+        <a href="https://wa.me/919876543210" className="mt-6 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white">
+          <MessageCircle className="h-4 w-4" /> Or chat on WhatsApp
+        </a>
       </div>
     </section>
   );
-}
+};
+
+export default Contact;
